@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gyldendal.Customer.Core\Gyldendal.Customer.Core.csproj" />
+    <ProjectReference Include="..\Gyldendal.Customer.Data\Gyldendal.Customer.Data.csproj" />
+  </ItemGroup>
+
+</Project>
