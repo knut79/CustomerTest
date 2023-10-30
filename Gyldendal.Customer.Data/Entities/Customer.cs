@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,17 +10,21 @@ using System.Threading.Tasks;
 
 namespace Gyldendal.Customer.Data.Entities
 {
+    [Index(nameof(ssn), IsUnique = true)]
     public class Customer
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int customerid { get; set; }
+
+        
         [Required]
-        public long ssn { get; set; }
+        public string ssn { get; set; }
 
         [Required]
-        [Column("firstname")]
         public string firstname { get; set; }
         [Required]
-        public string lastname { get; set; } 
+        public string lastname { get; set; }
         public string? email { get; set; } = string.Empty;
 
         public int? customertypeid { get; set; }

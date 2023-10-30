@@ -28,10 +28,10 @@ namespace Gyldendal.Customer.Test.Data
         {
             _dataContext = CreateDbContext();
             _customerRepository = new CustomersRepository(_dataContext);
-            var ssnForThisTest = 999;
+            var ssnForThisTest = "999";
             var customerEntity = new Customer.Data.Entities.Customer
             {
-                ssn = ssnForThisTest,
+                ssn = "ssnForThisTest",
                 customertypeid = 1,
                 email = "test@test.no",
                 firstname = "test",

@@ -16,6 +16,10 @@ Run Update-Database from package management console PM>Update-Database
 Run web api project (will default to swagger index)
 Test api through swagger UI
 
+Add new migrations with EF
+eg. Gyldendal.Customer.Data>dotnet ef migrations -v add <MigrationName> -p .\Gyldendal.Customer.Data.csproj -s ..\Gyldendal.Customer.WebApi\Gyldendal.Customer.WebApi.csproj
+remove
+Gyldendal.Customer.Data>dotnet ef migrations -v remove -p .\Gyldendal.Customer.Data.csproj -s ..\Gyldendal.Customer.WebApi\Gyldendal.Customer.WebApi.csproj
 
 
 

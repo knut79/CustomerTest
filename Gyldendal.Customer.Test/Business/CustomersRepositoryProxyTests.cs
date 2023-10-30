@@ -44,7 +44,7 @@ namespace Gyldendal.Customer.Test.Business
                 email = "email",
                 firstname = "firstname",
                 lastname = "lastname",
-                ssn = 123
+                ssn = "123"
             };
             customers.Add(customer);
             _customersRepositoryMock = new Mock<ICustomersRepository>();
@@ -60,7 +60,7 @@ namespace Gyldendal.Customer.Test.Business
             Assert.AreEqual(customer.firstname, result.Data[0].FirstName);
             Assert.AreEqual(customer.lastname, result.Data[0].LastName);
             Assert.AreEqual(customer.email, result.Data[0].Email);
-            Assert.AreEqual(customer.ssn, result.Data[0].ssn);
+            Assert.AreEqual(customer.ssn, result.Data[0].Ssn);
         }
     }
 }

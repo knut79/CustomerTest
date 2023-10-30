@@ -20,7 +20,7 @@ namespace Gyldendal.Customer.Business.Wrappers
             _customersRepository = customersRepository;
         }
 
-        public async Task<bool> DeleteAsync(long ssn)
+        public async Task<bool> DeleteAsync(string ssn)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Gyldendal.Customer.Business.Wrappers
 
     public interface ICustomersRepositoryProxy
     {
-        Task<bool> DeleteAsync(long ssn);
+        Task<bool> DeleteAsync(string ssn);
         Task<bool> UpsertAsync(Data.Entities.Customer customer);
         Task<PagedResponse<List<CustomerDto>>> GetAsync(int page, int pagesize);
     }

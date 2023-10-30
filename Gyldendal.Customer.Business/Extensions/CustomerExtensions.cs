@@ -18,7 +18,7 @@ namespace Gyldendal.Customer.Business.Extensions
         public static CustomerDto MapToCustomerDto(this Data.Entities.Customer customer)
         {
             var customerDto = new CustomerDto();
-            customerDto.ssn = customer.ssn;
+            customerDto.Ssn = customer.ssn;
             customerDto.FirstName = customer.email;
             customerDto.LastName = customer.lastname;
             customerDto.Email = customer.email;

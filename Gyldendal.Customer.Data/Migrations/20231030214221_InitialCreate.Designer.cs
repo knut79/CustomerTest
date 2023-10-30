@@ -12,53 +12,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gyldendal.Customer.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231027201149_FillDataInCustomerType")]
-    partial class FillDataInCustomerType
+    [Migration("20231030214221_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Gyldendal.Customer.Data.Entities.Car", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<string>("brand")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("model")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("test")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("year")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.ToTable("cars");
-                });
-
             modelBuilder.Entity("Gyldendal.Customer.Data.Entities.Customer", b =>
                 {
-                    b.Property<int>("ssn")
+                    b.Property<int>("customerid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ssn"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("customerid"));
 
                     b.Property<int?>("customertypeid")
                         .HasColumnType("integer");
@@ -68,14 +41,17 @@ namespace Gyldendal.Customer.Data.Migrations
 
                     b.Property<string>("firstname")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("firstname");
+                        .HasColumnType("text");
 
                     b.Property<string>("lastname")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("ssn");
+                    b.Property<string>("ssn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("customerid");
 
                     b.HasIndex("customertypeid");
 

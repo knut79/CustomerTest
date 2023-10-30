@@ -51,7 +51,7 @@ namespace Gyldendal.Customer.WebApi.Controllers
         [Route("Delete")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CustomerDto>> DeleteAsync(long ssn)
+        public async Task<ActionResult<CustomerDto>> DeleteAsync(string ssn)
         {
             var found = await _customersRepositoryProxy.DeleteAsync(ssn);
             return found ? Ok() : NotFound(); 

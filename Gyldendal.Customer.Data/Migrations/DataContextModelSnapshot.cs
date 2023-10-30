@@ -17,18 +17,18 @@ namespace Gyldendal.Customer.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Gyldendal.Customer.Data.Entities.Customer", b =>
                 {
-                    b.Property<long>("ssn")
+                    b.Property<int>("customerid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ssn"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("customerid"));
 
                     b.Property<int?>("customertypeid")
                         .HasColumnType("integer");
@@ -38,16 +38,22 @@ namespace Gyldendal.Customer.Data.Migrations
 
                     b.Property<string>("firstname")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("firstname");
+                        .HasColumnType("text");
 
                     b.Property<string>("lastname")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("ssn");
+                    b.Property<string>("ssn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("customerid");
 
                     b.HasIndex("customertypeid");
+
+                    b.HasIndex("ssn")
+                        .IsUnique();
 
                     b.ToTable("customers");
                 });

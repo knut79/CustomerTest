@@ -9,7 +9,7 @@ namespace Gyldendal.Customer.Core.Dtos
 {
     public class CustomerDto
     {
-        public long ssn { get; set; }
+        public string Ssn { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

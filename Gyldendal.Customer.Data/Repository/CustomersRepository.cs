@@ -39,6 +39,7 @@ namespace Gyldendal.Customer.Data.Repository
                 existing.email = customer.email;
                 existing.firstname = customer.firstname;
                 existing.lastname = customer.lastname;
+                _dataContext.customers.Update(existing);
             }
             else
             {
@@ -49,7 +50,7 @@ namespace Gyldendal.Customer.Data.Repository
             return create;
         }
 
-        public async Task<bool> DeleteAsync(long ssn)
+        public async Task<bool> DeleteAsync(string ssn)
         {
             var found = false;
             var customerToDelete = await _dataContext.customers.SingleOrDefaultAsync(l => l.ssn == ssn);
@@ -65,7 +66,7 @@ namespace Gyldendal.Customer.Data.Repository
 
     public interface ICustomersRepository
     {
-        Task<bool> DeleteAsync(long ssn);
+        Task<bool> DeleteAsync(string ssn);
         Task<bool> UpsertAsync(Entities.Customer customer);
         Task<List<Entities.Customer>> GetAsync(int page, int pageSize);
         Task<int> TotalRecordsAsync();

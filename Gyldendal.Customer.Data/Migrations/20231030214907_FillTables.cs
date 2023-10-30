@@ -1,5 +1,4 @@
 ﻿using Gyldendal.Customer.Core.Enums;
-using Gyldendal.Customer.Data.Enum;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -7,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Gyldendal.Customer.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class FillDataInCustomerType : Migration
+    public partial class FillTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +16,13 @@ namespace Gyldendal.Customer.Data.Migrations
                 migrationBuilder.InsertData(table: "CustomerType",
                     columns: new[] { "customertypeid", "name" },
                     values: new object[] { i, $"{System.Enum.GetName(typeof(CustomerTypeEnum), i)}" });
+
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                migrationBuilder.InsertData(table: "customers",
+                    columns: new[] { "ssn", "firstname", "lastname", "email", "customertypeid" },
+                    values: new object[] { i.ToString(), "test", "test", "test@test", (i % 3) + 1 });
             }
         }
 
