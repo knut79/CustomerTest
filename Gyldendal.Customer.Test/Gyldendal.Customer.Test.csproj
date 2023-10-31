@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gyldendal.Customer.Business\Gyldendal.Customer.Business.csproj" />
+    <ProjectReference Include="..\Gyldendal.Customer.WebApi\Gyldendal.Customer.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

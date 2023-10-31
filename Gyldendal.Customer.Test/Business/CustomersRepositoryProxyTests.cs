@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gyldendal.Customer.Business.Wrappers;
 using Gyldendal.Customer.Core.Dtos;
+using Gyldendal.Customer.Core.Enums;
 using Gyldendal.Customer.Data.Repository;
 using Moq;
 
@@ -33,10 +34,12 @@ namespace Gyldendal.Customer.Test.Business
         }
 
         [TestMethod]
-        public async Task GetAsync_Assert_Calls()
+        public async Task Get_Assert_Calls()
         {
             var page = 1;
             var pageSize = 10;
+            string yearOfBith = "1984";
+            CustomerTypeEnum type = CustomerTypeEnum.Bedrift;
             var customers = new List<Customer.Data.Entities.Customer>();
             var customer = new Customer.Data.Entities.Customer
             {
@@ -48,15 +51,15 @@ namespace Gyldendal.Customer.Test.Business
             };
             customers.Add(customer);
             _customersRepositoryMock = new Mock<ICustomersRepository>();
-            _customersRepositoryMock.Setup(l => l.TotalRecordsAsync()).ReturnsAsync(100);
-            _customersRepositoryMock.Setup(l => l.GetAsync(page,pageSize)).ReturnsAsync(new List<Customer.Data.Entities.Customer>());
+            _customersRepositoryMock.Setup(l => l.TotalRecordsAsync(yearOfBith,type)).ReturnsAsync(100);
+            _customersRepositoryMock.Setup(l => l.GetAsync(page,pageSize,yearOfBith,type)).ReturnsAsync(new List<Customer.Data.Entities.Customer>());
             _customersRepositoryMock = new Mock<ICustomersRepository>();
             var classToTest = new CustomersRepositoryProxy(_customersRepositoryMock.Object);
 
-            var result = await classToTest.GetAsync(page, pageSize);
+            var result = await classToTest.GetAsync(page, pageSize, yearOfBith, type);
 
-            _customersRepositoryMock.Verify(l=>l.TotalRecordsAsync(),Times.Once);
-            _customersRepositoryMock.Verify(l=>l.GetAsync(page,pageSize),Times.Once);
+            _customersRepositoryMock.Verify(l=>l.TotalRecordsAsync(yearOfBith,type),Times.Once);
+            _customersRepositoryMock.Verify(l=>l.GetAsync(page,pageSize,yearOfBith,type),Times.Once);
             Assert.AreEqual(customer.firstname, result.Data[0].FirstName);
             Assert.AreEqual(customer.lastname, result.Data[0].LastName);
             Assert.AreEqual(customer.email, result.Data[0].Email);

@@ -8,12 +8,12 @@ namespace Gyldendal.Customer.WebApi.Extensions
 
         public static CustomerParameters ValidateSsn(this CustomerParameters parameters, Dictionary<string, string> errors)
         {
-            //Regex regexSsn = new Regex(@"^(?=\d{11}$)0*[1-9]*$");
             Regex regexSsn = new Regex(@"^(0[1-9]|[1-2][0-9]|31(?!(?:0[2469]|11))|30(?!02))(0[1-9]|1[0-2])(\d{2})(.?)(\d{5})$");
-            Match matchSsn = regexSsn.Match(parameters.Ssn.ToString());
+            Match matchSsn = regexSsn.Match(parameters.Ssn);
+            var nameOfProperty = nameof(parameters.Ssn);
             if (!matchSsn.Success)
             {
-                errors.Add("ssn", $"{parameters.Ssn.ToString()} Not valid ssn format");
+                errors.Add(nameOfProperty, $"{parameters.Ssn} Not valid {nameOfProperty.ToLower()} format");
             }
 
             return parameters;
@@ -21,9 +21,10 @@ namespace Gyldendal.Customer.WebApi.Extensions
 
         public static CustomerParameters ValidateEmail(this CustomerParameters parameters, Dictionary<string, string> errors)
         {
+            var nameOfProperty = nameof(parameters.Email);
             if (string.IsNullOrEmpty(parameters.Email))
             {
-                errors.Add("email", "Email is required");
+                errors.Add(nameOfProperty, $"{nameOfProperty} is required");
             }
             else
             {
@@ -31,7 +32,7 @@ namespace Gyldendal.Customer.WebApi.Extensions
                 Match matchEmail = regexEmail.Match(parameters.Email);
                 if (!matchEmail.Success)
                 {
-                    errors.Add("email", $"{parameters.Email}Not valid email format");
+                    errors.Add(nameOfProperty, $"{parameters.Email} Not valid {nameOfProperty.ToLower()} format");
                 }
             }
             return parameters;

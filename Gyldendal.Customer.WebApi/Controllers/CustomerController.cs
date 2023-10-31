@@ -22,9 +22,9 @@ namespace Gyldendal.Customer.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PagedResponse<List<CustomerDto>>>> GetAsync(int pageNumber, int pageSize)
+        public async Task<ActionResult<PagedResponse<List<CustomerDto>>>> GetAsync(int pageNumber, int pageSize, string? yearOfBirth, CustomerTypeEnum? type)
         {
-            var customersPage = await _customersRepositoryProxy.GetAsync(pageNumber,pageSize);
+            var customersPage = await _customersRepositoryProxy.GetAsync(pageNumber,pageSize,yearOfBirth,type);
             return customersPage;
         }
 
